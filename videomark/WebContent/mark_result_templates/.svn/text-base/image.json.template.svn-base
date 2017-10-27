@@ -1,0 +1,20 @@
+{
+	"filename" : "filename",
+	"width" : "100px",
+	"height" : "100px",
+	"depth" : 30,
+	"objects" : [
+		{
+			"name" : "horse",
+			"pose" : "Right",
+			"truncated" : 0,
+			"difficult" : 0,
+			"bndbox" : {
+				"xmin" : 20,
+				"ymin" : 30,
+				"xmax" : 40,
+				"ymax" : 50
+			}
+		}
+	]
+}

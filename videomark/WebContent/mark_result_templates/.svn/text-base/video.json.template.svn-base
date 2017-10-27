@@ -1,0 +1,22 @@
+{
+	"mark_object" : {
+		"file_name" : "xxx.mp4",
+		"collect_info" : {
+			"device" : "xxx",
+			"driver" : "xxx",
+			"place" : "xxx",
+			"date" : "xxxx-xx-xx"
+			"time" : "xx:xx:xx"
+		},
+		"mark_info" : {
+			"weather" : { "sunshine" | "overcast" | "cloudy" | "light_rain" | "heavy_rain" | "sonw" | "fog" },
+			"road_type" : { "urban_road" | "expressway" | "rural_road" },
+			"road_condition" : { "normal" & "tunnel" & "crossing" & "bend" & "rampway" },
+			"light" : { "normal" & "frontlight" & "sidelight" & "backlight" & "infrared" },
+			"video_details" : { "FCWS" & "PCWS" & "LDWS" & "TSR" & "LAMP" },
+			"target" : { "persion" & "vehicle" & "ride" & "traffic_sign" }
+			"video_note" : "",
+			"special_case" : ""
+		}
+    }
+}

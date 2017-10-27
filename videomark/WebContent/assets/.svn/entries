@@ -1,0 +1,129 @@
+10
+
+dir
+36
+svn://192.168.1.118/videomark/WebContent/assets
+svn://192.168.1.118/videomark
+
+
+
+1999-12-29T03:06:39.685163Z
+36
+liwei
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+045a60b7-5f2f-454e-aab1-b6fc3054d532
+
+bootstrap
+dir
+
+bootstrap-table
+dir
+
+dangyuchao
+dir
+
+dashboard_jsp
+dir
+
+dongliang
+dir
+
+font-awesome-4.7.0
+dir
+
+jquery-3.2.1.min.js
+file
+
+
+
+
+2017-10-25T09:12:08.094000Z
+c9f5aeeca3ad37bf2aa006139b935f0a
+2017-09-30T07:57:06.417479Z
+1
+liwei
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+86659
+
+login_jsp
+dir
+
+video_mark_jsp
+dir
+
+web-context-path.js
+file
+
+
+
+
+2017-10-25T09:12:05.514000Z
+ae7e4fb3241058866916f5f19b1ae9fc
+1999-12-24T05:33:02.526116Z
+28
+liwei
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+216
+
+yangxiao
+dir
+
+zhangyihe
+dir
+
+ztree
+dir
+

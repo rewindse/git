@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+.select {
+	width: 100px;
+	height: 100%;
+	box-sizing: border-box;
+	background: none;
+	border: 1px solid #222;
+	outline: none;
+	-webkit-appearance: none;
+	padding: 0 5px;
+	line-height: inherit;
+	color: inherit;
+	cursor: default;
+	font-size: 14px;
+	position: relative;
+}
+
+.select option {
+	color: #222;
+}
+
+.select option:hover {
+	color: #fff;
+}
+
+.select option:checked {
+	background: #535353;
+	color: #fff;
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+		
+		<title>视频标注系统</title>
+		
+		<!-- Bootstrap core CSS -->
+		<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<link href="assets/dashboard_jsp/ie10-viewport-bug-workaround.css" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link href="assets/dashboard_jsp/dashboard.css" rel="stylesheet">
+		<link href="assets/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+		
+		<script src="assets/jquery-3.2.1.min.js" type="text/javascript"></script>
+		<script src="assets/web-context-path.js" type="text/javascript"></script>
+		
+		<script type="text/javascript">
+			var marker_menus = [
+				{ "key" : "mission_management", "label" : "任务管理", "link" : "/task_list.jsp", "is_active" : false },
+				{ "key" : "result_management", "label" : "标注结果管理", "link" : "/resultfile.jsp", "is_active" : false }
+			];
+		
+			var menus = [
+				{ "key" : "user_management", "label" : "用户管理", "link" : "/user_list.jsp", "is_active" : true },
+				{ "key" : "mission_management", "label" : "任务管理", "link" : "/task_list.jsp", "is_active" : false },
+				{ "key" : "file_management", "label" : "文件管理", "link" : "/filemanage.jsp", "is_active" : false },
+				{ "key" : "result_management", "label" : "标注结果管理", "link" : "/resultfile.jsp", "is_active" : false }
+			];
+		</script>
+	</head>
+
+	<body height="100%">
+	<div class="Head_1">
+		<div class="Head_1_Logo">
+			<b style="font-family: '黑体'">视频标注管理系统</b> 
+        </div>
+        <div class="Head_1_UserWelcome">
+			<!--<i id="user_icon" class="fa fa-user fa-2x" aria-hidden="true"></i>-->
+			<i id="logout_icon" class="fa fa-sign-out fa-2x" aria-hidden="true" title="退出"></i>
+		</div>
+		<script type="text/javascript">
+			$('#logout_icon').bind('click', function (e) {
+				$.post(WEB_CONTEXT_PATH + '/user/logout', function (json) {
+					$(window).attr('location', WEB_CONTEXT_PATH + '/login.html')
+				});
+			});
+		</script>
+	</div>
+
+	<div class="container-fluid" height="100%">
+		<div class="row" height="100%">
+			<div class="col-sm-3 col-md-2 sidebar"><ul id="menu_ul" class="nav nav-sidebar"></ul></div>
+			<div id='main_div' class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"></div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+		function initial_menu_ul() {
+			var menu_ul = document.getElementById('menu_ul');
+			menu_ul.innerHTML = '';
+			
+			$.getJSON(WEB_CONTEXT_PATH + '/user/current_user', function (user) {
+				$.ajax({
+					"url": WEB_CONTEXT_PATH + "/role/list",
+					"dataType": "json",
+					"data": { "role_id" : user.roleID },
+					"success" : function (role) {
+						if (role.rolename == 'marker') {
+							menus = marker_menus;
+						}
+					}
+				});
+			});
+			for (var i in menus) {
+				var menu = menus[i];
+				if (menu.is_active) {
+					menu_ul.innerHTML += '<li class="active"><a href="javascript:menu_on_click(\'' + menu.key + '\');">' + menu.label + '</a></li>';
+				} else {
+					menu_ul.innerHTML += '<li><a href="javascript:menu_on_click(\'' + menu.key + '\');">' + menu.label + '</a></li>';
+				}
+			}
+		}
+	
+		function menu_on_click(key) {
+						
+			document.getElementById('main_div').innerHTML = '';
+			
+			var current_menu = {};
+			for (var i in menus) {
+				var menu = menus[i];
+				menu.is_active = false;
+				if (menu.key === key) {
+					menu.is_active = true;
+					current_menu = menu;
+				}
+			}
+			initial_menu_ul();
+	
+			var main_div = document.getElementById('main_div');
+			var src = WEB_CONTEXT_PATH + current_menu.link;
+			main_div.innerHTML = '<iframe onload="javascript:iframeLoad();" id="main_iframe" src="' + src
+					+ '" frameborder="no" width="100%"></iframe>';
+		}
+		
+		function iframeLoad() {
+			var ifm = document.getElementById("main_iframe");
+			ifm.height = (document.documentElement.clientHeight*1.3);
+		}
+		
+		initial_menu_ul();
+		menu_on_click(menus[0].key);
+		
+		setInterval(function() {
+			var ifm = document.getElementById("main_iframe");
+			ifm.height = ifm.contentDocument.documentElement.scrollHeight;
+			
+			var ih = $('#main_div')[0].clientHeight;
+			var ph = document.documentElement.clientHeight;
+			$('.col-sm-3.col-md-2.sidebar').css('height', ((ih > ph) ? ih : ph ) + 'px');
+		}, 500);
+	</script>
+	<!-- Bootstrap core JavaScript
+	    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+	<script src="assets/dashboard_jsp/holder.min.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="assets/dashboard_jsp/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>
